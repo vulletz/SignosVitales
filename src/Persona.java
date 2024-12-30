@@ -1,39 +1,31 @@
+import java.util.ArrayList;
+
 public class Persona {
     private final String NOMBRE;
     private final int EDAD;
-    private SignosVitales signosVitales;
+    private final ArrayList<ParametroDeSalud> signosVitales;
 
-    public Persona(String nombre, int edad, SignosVitales signosVitales) {
+    public Persona(String nombre, int edad, ArrayList<ParametroDeSalud> signosVitales) {
         this.NOMBRE = nombre;
         this.EDAD = edad;
         this.signosVitales = signosVitales;
     }
 
-    public String obtenerNombre(){
+    public String obtenerNombre() {
         return NOMBRE;
     }
 
-    public int obtenerEdad(){
+    public int obtenerEdad() {
         return EDAD;
     }
 
-    public SignosVitales obtenerSignosVitales() {
+    public ArrayList<ParametroDeSalud> obtenerSignosVitales() {
         return signosVitales;
     }
 
-    public void establecerSignosVitales(SignosVitales signosVitales) {
-        this.signosVitales = signosVitales;
-    }
-
-    public void evaluarRiesgos() {
-        signosVitales.evaluarRiesgos();
-    }
-
-    public boolean sonSignosVitalesNormales() {
-        return signosVitales.sonSignosVitalesNormales();
-    }
-
     public void mostrarMarcasTemporales() {
-        signosVitales.mostrarMarcasTemporales();
+        for (ParametroDeSalud parametro : signosVitales) {
+            System.out.println(parametro.marcaTemporal());
+        }
     }
 }
