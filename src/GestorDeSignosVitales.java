@@ -13,6 +13,8 @@ public class GestorDeSignosVitales {
 
         // pruebas unitarias
         realizarPruebasUnitarias();
+
+        //
     }
 
     private static void evaluarSignos(Persona persona) {
