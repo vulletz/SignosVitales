@@ -1,11 +1,8 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class PresionArterial implements ParametroDeSalud{
-    private final int SISTOLICA;
-    private final int DIASTOLICA;
-    private String MARCA_TEMPORAL;
+public class PresionArterial implements SignoVital {
+    private final int sistolica;
+    private final int diastolica;
 
     private static final int PRESION_SISTOLICA_ALTA = 140;
     private static final int PRESION_SISTOLICA_BAJA = 90;
@@ -13,23 +10,34 @@ public class PresionArterial implements ParametroDeSalud{
     private static final int PRESION_DIASTOLICA_BAJA = 60;
 
     public PresionArterial(int sistolica, int diastolica) {
-        this.SISTOLICA = sistolica;
-        this.DIASTOLICA = diastolica;
+        this.sistolica = sistolica;
+        this.diastolica = diastolica;
     }
 
     public int obtenerSistolica(){
-        return SISTOLICA;
+        return sistolica;
+    }
+    public int obtenerDiastolica(){
+        return diastolica;
     }
 
-    public int obtenerDiastolica(){
-        return DIASTOLICA;
+    public String obtenerValor() { return sistolica + "/" + diastolica; }
+
+    @Override
+    public String obtenerNombre(){
+        return "Presión Arterial";
+    }
+
+    @Override
+    public String obtenerUnidad(){
+        return "mmHg";
     }
 
     @Override
     public boolean esNormal() {
-        if (SISTOLICA > PRESION_SISTOLICA_ALTA || DIASTOLICA > PRESION_DIASTOLICA_ALTA) {
+        if (sistolica > PRESION_SISTOLICA_ALTA || diastolica > PRESION_DIASTOLICA_ALTA) {
             return false;
-        } else if (SISTOLICA < PRESION_SISTOLICA_BAJA || DIASTOLICA < PRESION_DIASTOLICA_BAJA) {
+        } else if (sistolica < PRESION_SISTOLICA_BAJA || diastolica < PRESION_DIASTOLICA_BAJA) {
             return false;
         } else {
             return true;
@@ -37,34 +45,19 @@ public class PresionArterial implements ParametroDeSalud{
     }
 
     @Override
-    public String marcaTemporal() {
-        if(Objects.equals(MARCA_TEMPORAL, null)){
-            LocalDateTime ahora = LocalDateTime.now();
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            this.MARCA_TEMPORAL = ahora.format(formato);
-            return ahora.format(formato);
-        }else{
-            return MARCA_TEMPORAL;
-        }
-    }
-
-    @Override
-    public String alteracionDetectada() {
-        if (SISTOLICA > PRESION_SISTOLICA_ALTA || DIASTOLICA > PRESION_DIASTOLICA_ALTA) {
+    public String obtenerAnomalia() {
+        if (sistolica > PRESION_SISTOLICA_ALTA || diastolica > PRESION_DIASTOLICA_ALTA) {
             return "Hipertensión";
-        } else if (SISTOLICA < PRESION_SISTOLICA_BAJA || DIASTOLICA < PRESION_DIASTOLICA_BAJA) {
+        } else if (sistolica < PRESION_SISTOLICA_BAJA || diastolica < PRESION_DIASTOLICA_BAJA) {
             return "Hipotensión";
         } else {
             return "Ninguno";
         }
     }
 
-    @Override
     public void evaluarRiesgo(String alteracion) {
         if (Objects.equals(alteracion, "Hipertensión") || Objects.equals(alteracion, "Hipotensión")){
             System.out.println("Alteración: "+alteracion+"\n Riesgo: ALTO");
-        }else if (Objects.equals(alteracion, "Ninguno")){
-            System.out.println("Sin riesgo inmediato. Mantener monitoreo.");
         }
     }
 }

@@ -1,31 +1,26 @@
 import java.util.ArrayList;
 
 public class Persona {
-    private final String NOMBRE;
-    private final int EDAD;
-    private final ArrayList<ParametroDeSalud> signosVitales;
+    private final String nombre;
+    private final int edad;
+    private final ArrayList<SignoVital> signosVitales;
 
-    public Persona(String nombre, int edad, ArrayList<ParametroDeSalud> signosVitales) {
-        this.NOMBRE = nombre;
-        this.EDAD = edad;
+    public Persona(String nombre, int edad, ArrayList<SignoVital> signosVitales) {
+        this.nombre = nombre;
+        this.edad = edad;
         this.signosVitales = signosVitales;
     }
 
     public String obtenerNombre() {
-        return NOMBRE;
+        return nombre;
     }
 
     public int obtenerEdad() {
-        return EDAD;
+        return edad;
     }
 
-    public ArrayList<ParametroDeSalud> obtenerSignosVitales() {
+    public ArrayList<SignoVital> obtenerSignosVitales() {
         return signosVitales;
     }
 
-    public void mostrarMarcasTemporales() {
-        for (ParametroDeSalud parametro : signosVitales) {
-            System.out.println(parametro.marcaTemporal());
-        }
-    }
 }
