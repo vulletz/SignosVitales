@@ -3,5 +3,6 @@ interface SignoVital {
     String obtenerUnidad();
     String obtenerValor();
     String obtenerAnomalia();
+    void procesarAnomalia(String anomalia);
     boolean esNormal();
 }

@@ -55,7 +55,8 @@ public class PresionArterial implements SignoVital {
         }
     }
 
-    public void evaluarRiesgo(String alteracion) {
+    @Override
+    public void procesarAnomalia(String alteracion) {
         if (Objects.equals(alteracion, "Hipertensión") || Objects.equals(alteracion, "Hipotensión")){
             System.out.println("Alteración: "+alteracion+"\n Riesgo: ALTO");
         }

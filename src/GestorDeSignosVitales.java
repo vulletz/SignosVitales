@@ -10,9 +10,6 @@ public class GestorDeSignosVitales {
 
         // evaluación de signos vitales de la persona creada
         evaluarSignos(persona);
-
-        // pruebas unitarias
-        realizarPruebasUnitarias();
     }
 
     private static void evaluarSignos(Persona persona) {
@@ -27,15 +24,7 @@ public class GestorDeSignosVitales {
             if (parametro.esNormal()){
                 System.out.println("Sin riesgo inmediato. Mantener monitoreo.");
             }else{
-                if (parametro instanceof PulsoCardiaco pulso) {
-                    pulso.evaluarRiesgo(pulso.obtenerAnomalia());
-                }
-                else if (parametro instanceof PresionArterial presion) {
-                    presion.evaluarRiesgo(presion.obtenerAnomalia());
-                }
-                else if (parametro instanceof Temperatura temperatura) {
-                    temperatura.evaluarRiesgo(temperatura.obtenerAnomalia());
-                }
+                parametro.procesarAnomalia(parametro.obtenerAnomalia());
             }
 
         }
@@ -45,25 +34,6 @@ public class GestorDeSignosVitales {
         LocalDateTime ahora = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return ahora.format(formato);
-    }
-
-    private static void realizarPruebasUnitarias() {
-        System.out.println("\n\nPruebas unitarias:");
-
-        // Prueba: Bradicardia
-        PulsoCardiaco pulso = new PulsoCardiaco(50);
-        System.out.println("\nPrueba 1 - Pulso: " + pulso.obtenerValor() + " " + pulso.obtenerUnidad());
-        pulso.evaluarRiesgo(pulso.obtenerAnomalia());
-
-        // Prueba: Hipertensión
-        PresionArterial presion = new PresionArterial(150, 95);
-        System.out.println("\nPrueba 2 - Presión Arterial: " + presion.obtenerValor() + " " + presion.obtenerUnidad());
-        presion.evaluarRiesgo(presion.obtenerAnomalia());
-
-        // Prueba: Fiebre
-        Temperatura temperatura = new Temperatura(38.5, "C");
-        System.out.println("\nPrueba 3 - Temperatura: " + temperatura.obtenerValor() + " " + temperatura.obtenerUnidad());
-        temperatura.evaluarRiesgo(temperatura.obtenerAnomalia());
     }
 
     private static Persona generarPersonaAleatoria() {

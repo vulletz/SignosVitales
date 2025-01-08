@@ -43,7 +43,8 @@ public class Temperatura implements SignoVital {
         }
     }
 
-    public void evaluarRiesgo(String alteracion) {
+    @Override
+    public void procesarAnomalia(String alteracion)  {
         if (Objects.equals(alteracion, "Hipotermia leve")){
             System.out.println("Alteración: "+alteracion+"\n Riesgo: BAJO");
         }else if (Objects.equals(alteracion, "Fiebre")){

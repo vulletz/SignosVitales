@@ -47,7 +47,8 @@ public class PulsoCardiaco implements SignoVital {
         }
     }
 
-    public void evaluarRiesgo(String alteracion) {
+    @Override
+    public void procesarAnomalia(String alteracion)  {
         if (Objects.equals(alteracion, "Bradicardia")){
             System.out.println("Alteración: "+alteracion+"\n Riesgo: BAJO");
         }else if (Objects.equals(alteracion, "Taquicardia severa")){
